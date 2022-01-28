@@ -1,4 +1,4 @@
-# first ps script with input by runemarthinsen
+# first ps script with input by rune
 param(
     $name
 )
