@@ -21,45 +21,45 @@ function kortstokkTilStreng {
     return $streng = $streng.Substring(0,$streng.Length-1)
 }
 #summere kortstokk funksjon - vha switch
-function sumPoengKortstokk {
+#unction sumPoengKortstokk {
+#   [OutputType([int])]
+#   param (
+#       [object[]]
+#       $kortstokk
+#   )
+#
+#   $poengKortstokk = 0
+#
+#   foreach ($kort in $kortstokk) {
+#       $poengKortstokk += switch ($kort.value) {
+#           { $_ -cin @('J', 'Q' , 'K') } { 10 }
+#           'A' { 11 }
+#           default { $kort.value }
+#       }
+#   }
+#   return $poengKortstokk
+#
+#funksjon definisjon med fore-each løkke
+function sumpoengkortstokk {
     [OutputType([int])]
     param (
         [object[]]
         $kortstokk
     )
-
     $poengKortstokk = 0
-
     foreach ($kort in $kortstokk) {
-        $poengKortstokk += switch ($kort.value) {
-            { $_ -cin @('J', 'Q' , 'K') } { 10 }
-            'A' { 11 }
-            default { $kort.value }
+        if ($kort.value -ceq 'J' -or $kort.value -ceq 'Q' -or $kort.value -ceq 'K')  {
+            $poengKortstokk = $poengKortstokk + 10
         }
+        elseif ($kort.value -ceq 'A') {
+            $poengKortstokk = $poengKortstokk + 11
+        }
+        else {
+            $poengKortstokk = $poengKortstokk + $kort.value
+        }  
     }
-    return $poengKortstokk
+    return $poengkortstokk
 }
-#funksjon definisjon med fore-each løkke
-#function sumpoengkortstokk {
-#    [OutputType([int])]
-#    param (
-#        [object[]]
-#        $kortstokk
-#    )
-#    $poengKortstokk = 0
-#    foreach ($kort in $kortstokk) {
-#        if ($kort.value -ceq 'J' -or $kort.value -ceq 'Q' -or $kort.value -ceq 'K')  {
-#            $poengKortstokk = $poengKortstokk + 10
-#        }
-#        elseif ($kort.value -ceq 'A') {
-#            $poengKortstokk = $poengKortstokk + 11
-#        }
-#        else {
-#            $poengKortstokk = $poengKortstokk + $kort.value
-#        }  
-#    }
-#    return $poengkortstokk
-#}
 
 # eks på for-each løkke beregne verdien i kortstokken
 #$poengKortstokk = 0
@@ -86,12 +86,6 @@ $kortstokk = $kortstokk[2..$kortstokk.Count]
 $minPoengsum = sumPoengKortstokk -kortstokk $meg
 $magnusPoengsum = sumPoengKortstokk -kortstokk $magnus
 
-#skriver ut resultat
-Write-Output "Mine kort:  $(kortstokkTilStreng -kortstokk $meg) "
-Write-Output "Min poengsum: $minpoengsum"
-Write-Output "Magnus sine kort:  $(kortstokkTilStreng -kortstokk $magnus) "
-Write-Output "Magnus sin poengsum: $magnuspoengsum"
-
 #elseif for å sjekke hvem som vinner - evt 'uavgjort' hvis begge får 21 eller lik poengsum
 if (($magnusPoengsum -eq $blackjack) -and ($minPoengsum -eq $blackjack)) {
     $vinner = "Uavgjort"
@@ -112,5 +106,11 @@ elseif ($minpoengsum -ge $magnusPoengsum  ) {
     $vinner = "Meg"
 }
 
-#skriver ut vinner
+#skriver ut resultat
 Write-Output "Vinner: $vinner"
+Write-Output "Meg    | $minpoengsum | $(kortstokkTilStreng -kortstokk $meg)"
+Write-Output "Magnus | $magnuspoengsum | $(kortstokkTilStreng -kortstokk $magnus)"
+
+
+
+
