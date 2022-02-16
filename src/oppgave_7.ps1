@@ -105,8 +105,11 @@ elseif ($magnusPoengsum -ge $minPoengsum ) {
 elseif ($minpoengsum -ge $magnusPoengsum  ) {
     $vinner = "Meg"
 }
-
+#totalpoengsumvariabel
+$totalpoengsum=$minpoengsum+$magnuspoengsum
 #skriver ut resultat
+Write-Output "Kortstokk: $(kortstokkTilStreng -kortstokk $meg),$(kortstokkTilStreng -kortstokk $magnus) "
+Write-Output "Poengsum: $totalpoengsum"
 Write-Output "Vinner: $vinner"
 Write-Output "Meg    | $minpoengsum | $(kortstokkTilStreng -kortstokk $meg)"
 Write-Output "Magnus | $magnuspoengsum | $(kortstokkTilStreng -kortstokk $magnus)"
