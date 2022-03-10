@@ -16,7 +16,7 @@ jobs:
       - name: Login via Az module
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.azure_reds }}
+          creds: ${{ secrets.AZURE_CREDS }}
           enable-AzPSSession: true
 
 
