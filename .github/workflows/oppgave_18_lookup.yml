@@ -1,0 +1,15 @@
+- name: 'Run cleanup script'
+  uses: azure/powershell@v1
+  with:
+    inlineScript: #?#
+    azPSVersion: "latest"
+
+- name: 'logout from azure'
+  uses: azure/powershell@v1
+  with:
+    inlineScript: ./src/funcApp/cleanup.ps1
+      Disconnect-AzAccount -Scope CurrentUser
+      az logout
+      az cache purge
+      az account clear
+    azPSVersion: "latest"
