@@ -25,4 +25,4 @@ jobs:
           modules-to-cache: Az.Storage, Az.Functions, Az.Websites, Az.Resources, Az.Accounts
 
       - name: Deploy Function app
-        run: .src/funcApp/deployWithAZ.ps1
+        run: ./src/funcApp/deployWithAz.ps1 
