@@ -1,5 +1,6 @@
 name: oppgave 18
-on: [ workflow_dispatch ]
+on: 
+  workflow_dispatch:
 
 jobs:
   job1:
@@ -20,13 +21,13 @@ jobs:
       - name: 'Run cleanup script'
         uses: azure/powershell@v1
         with:
-          inlineScript: ./src/funcApp/cleanup.ps1
+          inlineScript: ./src/funcApp/cleanup.ps1 -resourceGroupName 'Rune-workshop-rji5q3ytgrlvq'
           azPSVersion: "latest"
 
       - name: 'logout from azure'
         uses: azure/powershell@v1
         with:
-          inlineScript: ./src/funcApp/cleanup.ps1 -resourceGroupName 'Rune-workshop-rji5q3ytgrlvq'
+          inlineScript:
             Disconnect-AzAccount -Scope CurrentUser
             az logout
             az cache purge
