@@ -1,0 +1,18 @@
+name: oppgave 15
+on:
+  - push
+  - workflow_dispatch
+
+
+jobs:
+  job1:
+    defaults:
+      run:
+        shell: pwsh
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run Blackjack script file
+        run: ./src/oppgave_8-10.ps1
