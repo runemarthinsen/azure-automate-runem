@@ -26,7 +26,7 @@ jobs:
       - name: 'logout from azure'
         uses: azure/powershell@v1
         with:
-          inlineScript: ./src/funcApp/cleanup.ps1
+          inlineScript: ./src/funcApp/cleanup.ps1 -resourceGroupName 'Rune-workshop-rji5q3ytgrlvq'
             Disconnect-AzAccount -Scope CurrentUser
             az logout
             az cache purge
